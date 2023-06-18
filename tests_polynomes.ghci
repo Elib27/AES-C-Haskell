@@ -1,0 +1,127 @@
+putStrLn "===Test des operations dans Zsur2Z==="
+putStrLn "\n/////////////Test de plusMod2/////////////\n"
+
+plusMod2 (Z2Z 0) (Z2Z 0)
+-- Z2Z 0
+plusMod2 (Z2Z 1) (Z2Z 0)
+-- Z2Z 1
+plusMod2 (Z2Z 1) (Z2Z 1)
+-- Z2Z 0
+
+putStrLn "\n/////////////Test de croixMod2/////////////\n"
+
+croixMod2 (Z2Z 0) (Z2Z 0)
+-- Z2Z 0
+croixMod2 (Z2Z 1) (Z2Z 0)
+-- Z2Z 0
+croixMod2 (Z2Z 1) (Z2Z 1)
+-- Z2Z 1
+
+putStrLn "\n\n===Test des operations dans l'anneau des polynomes a coefficients dans F2==="
+
+putStrLn "\n/////////////Test de plus/////////////\n"
+
+plusPCC (PCC [Z2Z 1]) (PCC [Z2Z 1])
+-- PCC [Z2Z 0]
+plusPCC (PCC [Z2Z 1, Z2Z 0]) (PCC [Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 0,Z2Z 1]
+plusPCC (PCC [Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 0,Z2Z 0,Z2Z 1]
+
+putStrLn "\n/////////////Test de croix/////////////\n"
+
+croixPCC (PCC [Z2Z 1]) (PCC [Z2Z 1])
+-- PCC [Z2Z 1]
+croixPCC (PCC [Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 1]
+croixPCC (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 1, Z2Z 1]
+croixPCC (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1]) -- exemple du FIPS 197
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1]
+
+
+putStrLn "\n\n===Test de modulo de polynômes==="
+
+putStrLn "\n/////////////Test de modPoly/////////////\n"
+
+modPoly (PCC [Z2Z 1 ,Z2Z 1, Z2Z 1]) (PCC [Z2Z 0,Z2Z 1])
+-- PCC [Z2Z 1]
+modPoly (PCC [Z2Z 1 ,Z2Z 1, Z2Z 1]) (PCC [Z2Z 1])
+-- PCC [Z2Z 0]
+modPoly (PCC [Z2Z 1,Z2Z 0, Z2Z 0,Z2Z 1 ,Z2Z 1,Z2Z 1 ,Z2Z 1, Z2Z 0, Z2Z 1 ,Z2Z 1,Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) polyM   --test du FIPS 197
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+modPoly (PCC [Z2Z 1,Z2Z 0, Z2Z 1,Z2Z 1]) (PCC [Z2Z 1,Z2Z 0, Z2Z 1])  
+-- PCC [Z2Z 0,Z2Z 1]
+modPoly (PCC [Z2Z 0]) (PCC [Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 0]
+
+
+putStrLn "\n\n===Test des opérations + et x modulo de polynômes==="
+
+putStrLn "\n/////////////Test de plusModPoly/////////////\n"
+
+plusModPoly (PCC [Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1])
+-- [Z2Z 1]
+plusModPoly (PCC [Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1])
+-- [Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]
+plusModPoly (PCC [Z2Z 1, Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1])
+-- [Z2Z 1, Z2Z 1, Z2Z 1]
+
+putStrLn "\n/////////////Test de foisModPoly/////////////\n"
+
+foisModPoly (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1]) polyM  --test du FIPS 197
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+foisModPoly (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 1]
+foisModPoly (PCC [Z2Z 1, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1])
+-- PCC [Z2Z 1]
+
+putStrLn "\n/////////////Test de plusGF2_8 et croixGF2_8/////////////\n"
+
+plusGF2_8 (PCC [Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 0, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 1,Z2Z 1]
+croixGF2_8 (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1]) --test du FIPS 197
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+
+putStrLn "\n/////////////Test de eucliEtendu/////////////\n"
+
+eucliEtendu (PCC [Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]) (PCC [Z2Z 1, Z2Z 1, Z2Z 1]) unit_a unit_m unit_m unit_a
+-- (PCC [Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 1,Z2Z 1])
+eucliEtendu polyM (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1]) unit_a unit_m unit_m unit_a
+-- (PCC [Z2Z 0,Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1])
+eucliEtendu polyM (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 1, Z2Z 1]) unit_a unit_m unit_m unit_a
+-- (PCC [Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1])
+
+putStrLn "\n/////////////Test de inverseGF2_8/////////////\n"
+
+inverseModPoly (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1]) polyM
+-- PCC [Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+inverseGF2_8 (PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+inverseGF2_8 (PCC [Z2Z 1, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1]
+inverseGF2_8 (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 1, Z2Z 1])
+-- PCC [Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1]
+inverseGF2_8 (PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0])
+-- PCC [Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]
+inverseGF2_8 (PCC [Z2Z 0]) -- dans la documentation, il est précisé que l'élément nul est mappé vers lui-même
+-- PCC [Z2Z 0]
+
+
+putStrLn "\n\n=== Test des opérations entre polynômes à coefficients dans GF(2^8) ==="
+
+putStrLn "\n/////////////Test de plus/////////////\n"
+
+plusPC2_8 (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 1, Z2Z 1], PCC [Z2Z 1, Z2Z 1, Z2Z 1]])) (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 1]]))
+-- PCGF28 (PCC [PCC [Z2Z 0,Z2Z 1,Z2Z 0],PCC [Z2Z 1,Z2Z 0,Z2Z 0]])
+plusPC2_8 (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 1, Z2Z 1]])) (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 1]]))
+-- PCGF28 (PCC [PCC [Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1],PCC [Z2Z 0,Z2Z 1,Z2Z 0],PCC [Z2Z 1,Z2Z 1,Z2Z 1]])
+plusPC2_8 (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 1]])) (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 0, Z2Z 1]]))
+-- PCGF28 (PCC [PCC [Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0],PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 0],PCC [Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1]])
+
+putStrLn "\n/////////////Test de croix/////////////\n"
+
+croixPC2_8 (PCGF28 (PCC [PCC [Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 1]])) (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1]]))
+-- PCGF28 (PCC [PCC [Z2Z 0,Z2Z 1,Z2Z 1,Z2Z 1],PCC [Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1],PCC [Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1],PCC [Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 1]])
+croixPC2_8 (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1, Z2Z 1], PCC [Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 1]])) (PCGF28 (PCC [PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1, Z2Z 1], PCC [Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 0, Z2Z 1], PCC [Z2Z 0, Z2Z 1, Z2Z 1, Z2Z 1], PCC [Z2Z 1, Z2Z 1, Z2Z 0, Z2Z 1]]))
+-- PCGF28 (PCC [PCC [Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 1],PCC [Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1],PCC [Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 1,Z2Z 0,Z2Z 0,Z2Z 1]])

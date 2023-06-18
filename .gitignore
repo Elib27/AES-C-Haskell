@@ -1,0 +1,24 @@
+.vscode/
+
+# Haskell compiled files
+*.hi
+Main
+
+# C files
+*.o
+main
+aes_functions_tests
+utils_tests
+aes_tests
+test_ciphered_ecb.txt
+test_ciphered_cbc.txt
+test_deciphered_ecb.txt
+test_deciphered_cbc.txt
+cervin_ciphered_cbc.bmp
+cervin_ciphered_ecb.bmp
+cervin_deciphered_ecb.bmp
+cervin_deciphered_cbc.bmp
+carre_ciphered_cbc.bmp
+carre_ciphered_ecb.bmp
+carre_deciphered_ecb.bmp
+carre_deciphered_cbc.bmp
